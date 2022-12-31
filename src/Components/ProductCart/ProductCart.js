@@ -1,52 +1,69 @@
 
 import React from 'react';
 import {
-    MDBCard,
-    MDBCardBody,
-    MDBCardTitle,
-    MDBCardText,
-    MDBCardImage,
-    MDBBtn,
-    MDBRipple,
+
     MDBRow,
-    MDBCol,
     MDBContainer
 } from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './ProductCart.css'
 import { addToCart } from '../../Features/cartSlice';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import Slider from '../Slider/Slider';
 
 const ProductCart = () => {
 
     const items = useSelector((state) => state.cartData.items);
     const dispatch = useDispatch();
+    const handleAddToCart = (item) => {
+
+        dispatch(addToCart(item));
+        toast.success('Product Added', {
+            position: "bottom-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+
+
+    }
 
     return (
         <div className="cards">
+
+            {/* banner slider  */}
+            {/* <Slider></Slider> */}
+
             <MDBContainer>
                 <MDBRow>
                     {
                         items.map(item => {
-                            const { id, title, img, price, quantity } = item;
+                            const { id, title, img, price, } = item;
                             return (
-                                <MDBCol className='product_card   my-3 text-center' md='4' lg="3" sm='6' xsm='6' key={id} >
-                                    <MDBCard className='h-100 ' >
-                                        <MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
-                                            <MDBCardImage src={img} className='img-fluid rounded product_img' alt='...' />
-                                            <Link>
-                                                <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
-                                            </Link>
-                                        </MDBRipple>
-                                        <MDBCardBody>
-                                            <MDBCardTitle>{title}</MDBCardTitle>
-                                            <MDBCardText>
-                                                Price: ${price}
-                                            </MDBCardText>
-                                        </MDBCardBody>
-                                        <MDBBtn className='CartBtn  d-block mx-auto' onClick={() => dispatch(addToCart(item))}>Add to cart</MDBBtn>
-                                    </MDBCard>
-                                </MDBCol>
+                                <div className='ProductCon  d-flex align-items-center justify-content-center col-sm-12  col-md-6 col-lg-4 col-xl-3'>
+                                    <div className="product p-4 my-3 ">
+                                        <div className="productImg d-flex align-items-center justify-content-center ">
+                                            <img src={img} height={'200px'} alt="" />
+                                        </div>
+                                        <div className="title text-center">
+                                            <h6>{title.slice(0, 12)}</h6>
+
+                                            <h4>${price}</h4>
+                                        </div>
+                                        <div className="productsBtn">
+
+                                            <button onClick={() => handleAddToCart(item)} className='btn btn-info px-5 rounded-pill '><AddShoppingCartIcon /> Add </button>
+
+                                        </div>
+                                    </div>
+                                </div>
                             )
                         })
 
@@ -58,6 +75,19 @@ const ProductCart = () => {
 
                 </MDBRow>
             </MDBContainer>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={1000}
+                limit={3}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
 
         </div >
     );

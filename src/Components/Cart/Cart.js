@@ -17,10 +17,14 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getCartTotal, removeItem, decreaseItemQuantity, increaseItemQuantity } from "../../Features/cartSlice";
 import './Cart.css'
+import { ToastContainer, toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 export default function Cart() {
+    const navigate = useNavigate()
     const { cart, totalPrice, totalQuantity } = useSelector(state => state.cartData);
 
     const dispatch = useDispatch();
@@ -28,6 +32,23 @@ export default function Cart() {
     useEffect(() => {
         dispatch(getCartTotal());
     }, [])
+
+
+    const handleDelete = (id) => {
+        dispatch(removeItem(id))
+
+        //toast notifications
+        toast.warn('Product Removed', {
+            position: "bottom-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
     return (
         <section className="h-100 gradient-custom">
             <MDBContainer className="py-5 h-100">
@@ -43,7 +64,7 @@ export default function Cart() {
 
                                 {
                                     cart.map(item => {
-                                        const { title, id, price, img, quantity } = item;
+                                        const { title, id, price, img, quantity, category, seller, stock } = item;
                                         console.log(quantity)
                                         return (
 
@@ -64,16 +85,25 @@ export default function Cart() {
 
                                                 <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
                                                     <p>
-                                                        <strong>{title}</strong>
+                                                        <strong>{title.slice(0, 15)}</strong>
                                                     </p>
 
                                                     <p>ID: {id}</p>
+                                                    <p>category: {category}</p>
+                                                    <p>seller: {seller}</p>
+                                                    <p>stock: {stock}</p>
 
-                                                    <MDBTooltip wrapperProps={{ size: "sm" }} wrapperClass="me-1 mb-2"
+
+                                                    {/* <MDBTooltip  wrapperProps={{ size: "sm" }} wrapperClass="me-1 mb-2"
                                                         title="Remove item">
-                                                        <MDBIcon fas icon="trash" onClick={() => dispatch(removeItem(id))} />
-                                                    </MDBTooltip>
+                                                        <MDBIcon fas icon="trash" />
+                                                    </MDBTooltip> */}
 
+
+                                                    <MDBBtn onClick={() => handleDelete(id)} className="px-3 ms-2 btn-danger">
+                                                        <MDBIcon fas icon="trash" />
+                                                    </MDBBtn>
+                                                    <hr />
 
                                                 </MDBCol>
                                                 <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
@@ -136,7 +166,7 @@ export default function Cart() {
                                     </MDBListGroupItem>
                                 </MDBListGroup>
 
-                                <MDBBtn block size="lg">
+                                <MDBBtn block size="lg" onClick={() => navigate('/shipment')}>
                                     Go to checkout
                                 </MDBBtn>
                             </MDBCardBody>
@@ -144,6 +174,22 @@ export default function Cart() {
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+
+
+            <ToastContainer
+                position="bottom-center"
+                autoClose={1000}
+                limit={3}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </section >
+
     );
 }
