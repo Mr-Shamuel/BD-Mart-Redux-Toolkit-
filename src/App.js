@@ -1,25 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, Route, Routes } from 'react-router-dom';
-import Adduser from './Components/Adduser/Adduser';
+// bootstrap 
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { Route, Routes } from 'react-router-dom';
+import Cart from './Components/Cart/Cart';
+
 import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
 import NotFound from './Components/NotFound/NotFound';
-import Showuser from './Components/Showuser/Showuser';
-import UpdateUser from './Components/UpdateUser/UpdateUser';
+import ProductCart from './Components/ProductCart/ProductCart';
+
 function App() {
   return (
     <div className="App ">
       <Navbar></Navbar>
+
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='adduser' element={<Adduser />} />
-        <Route path='showuser' element={<Showuser />} />
-        <Route path='userUpdate/:userid' element={<UpdateUser />} />
-        {/* <Route path='userUpdate' element={<UpdateUser />} /> */}
+        <Route path='/' element={<ProductCart />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      <Link></Link>
-
     </div>
   );
 }
