@@ -1,0 +1,25 @@
+.sidebar{
+    background-color: #1392c0;
+    /* background-color: #10386F; */
+    position: fixed;
+}
+.sidebar li{
+    margin-bottom: 2em;
+   
+}
+.sidebar li a{
+    text-decoration: none;
+   
+}
+.sidebar li:hover span{
+    display: inline-block;
+    transform: translate(7px);
+    transition:0.5s ease;
+    border-bottom: 1px solid tomato;
+    
+    border-radius: 5px;
+    
+}
+.sidebar  {
+    margin-right: 5px;
+}

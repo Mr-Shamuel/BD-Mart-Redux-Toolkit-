@@ -62,7 +62,7 @@ const Login = () => {
 
 
 
-            <div className='register mt-5  '>
+            <div className='register mt-5 vh-100 '>
                 <div>
 
                     <Box className='registerCon'
@@ -110,7 +110,7 @@ const Login = () => {
                         <br />
                         <div
                             onClick={HandleGoogleSignIn}
-                            className="googleBtn btn btn-outline-info text-dark border"><img src={google} alt="" /><p className='pt-1'>Continue with Google</p>
+                            className="googleBtn btn btn-outline-secondary  border-info  text-dark  "><img src={google} alt="" /><p className='pt-1'>Continue with Google</p>
                         </div>
 
                     </div>

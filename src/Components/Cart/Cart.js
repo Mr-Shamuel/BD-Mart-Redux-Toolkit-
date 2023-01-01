@@ -3,7 +3,6 @@ import {
     MDBCard,
     MDBCardBody,
     MDBCardHeader,
-    MDBCardImage,
     MDBCol,
     MDBContainer,
     MDBIcon,
@@ -12,7 +11,6 @@ import {
     MDBListGroupItem,
     MDBRipple,
     MDBRow,
-    MDBTooltip,
     MDBTypography,
 } from "mdb-react-ui-kit";
 import React, { useEffect } from "react";
@@ -39,7 +37,7 @@ export default function Cart() {
 
         //toast notifications
         toast.warn('Product Removed', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,

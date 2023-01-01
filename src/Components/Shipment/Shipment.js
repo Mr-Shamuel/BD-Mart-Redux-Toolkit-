@@ -8,7 +8,6 @@ import auth from '../../Firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-// import shipimg from '../../Img/hd regimg.png';
 
 const Shipment = () => {
     const [user] = useAuthState(auth);
@@ -44,9 +43,6 @@ const Shipment = () => {
                     <form className="ship-form"
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        {/* <input className="bg-info" defaultValue={"Total Price : $" + totalPrice}   {...register("cart", { required: true })} />
-                        <input className="bg-info" defaultValue={"Total Quantity : $" `${totalQuantity}`}   {...register("cart", { required: true })} /> */}
-
                         <p className='text-warning fw-bold'>Total Quantity : {totalQuantity}</p>
                         <p className='text-warning fw-bold'>Total Price : {totalPrice}</p>
 
@@ -68,7 +64,7 @@ const Shipment = () => {
                     </form>
                 </div>
                 <div className="col-md-6">
-                    {/* <img style={{ width: '50%', display: "block", margin: "30px auto" }} src={shipimg} alt="" /> */}
+
                 </div>
             </div>
 

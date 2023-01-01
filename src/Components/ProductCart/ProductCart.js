@@ -22,7 +22,7 @@ const ProductCart = () => {
 
         dispatch(addToCart(item));
         toast.success('Product Added', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -39,13 +39,14 @@ const ProductCart = () => {
         <div className="cards">
 
             {/* banner slider  */}
-            {/* <Slider></Slider> */}
+            <Slider></Slider>
 
             <MDBContainer>
+                <h1 className='text-center text-info mt-3'>All Products : </h1>
                 <MDBRow>
                     {
                         items.map(item => {
-                            const { id, title, img, price, } = item;
+                            const { title, img, price, } = item;
                             return (
                                 <div className='ProductCon  d-flex align-items-center justify-content-center col-sm-12  col-md-6 col-lg-4 col-xl-3'>
                                     <div className="product p-4 my-3 ">

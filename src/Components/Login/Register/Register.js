@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import fb from '../../../icon/fb.png'
 import google from '../../../icon/google.png'
 import './Register.css'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useUpdateProfile } from 'react-firebase-hooks/auth';
 
 import auth from '../../../Firebase/firebaseConfig';
+import axios from 'axios';
 
 
 const Register = () => {
@@ -38,17 +38,18 @@ const Register = () => {
     const handleSubmit = async (e) => {
 
         await createUserWithEmailAndPassword(email, password);
-        console.log(name)
         await updateProfile({ displayName: name });
+
+        //posting data to server 
+        axios.post('https://63ac4337da81ba97617eebed.mockapi.io/users', {
+            name: name,
+            email: email,
+        })
+            .then((response) => {
+
+            });
         e.preventDefault();
     }
-    // const handleSubmit = async (e) => {
-    //     const name = e.target.name.value
-    //     await createUserWithEmailAndPassword(email, password);
-    //     console.log(name)
-    //     await updateProfile({ displayName: name });
-    //     e.preventDefault();
-    // }
 
     // google signing 
     const [GoogleSignIn] = useSignInWithGoogle(auth);
@@ -78,7 +79,7 @@ const Register = () => {
             {/* using toast notifications  */}
             <ToastContainer></ToastContainer>
 
-            <div className='register mt-4'>
+            <div className='register mt-4 vh-100'>
                 <div>
                     <Box className='registerCon'
                         onSubmit={handleSubmit}
@@ -126,9 +127,8 @@ const Register = () => {
 
                         <div
                             onClick={HandleGoogleSignIn}
-                            className="googleBtn btn btn-outline-info text-dark border"><img src={google} alt="" /><p className='pt-1'>Continue with Google</p>
+                            className="googleBtn btn btn-outline-secondary  border-info  text-dark  "><img src={google} alt="" /><p className='pt-1'>Continue with Google</p>
                         </div>
-                        {/* <div onClick={() => GoogleSignIn(navigate(form, { replace: true }))} className="googleBtn btn btn-outline-info text-dark border"><img src={google} alt="" /><p className='pt-1'>Continue with Google</p> </div> */}
 
                     </div>
                 </div>
