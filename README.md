@@ -6,6 +6,8 @@ Bd mart is an Ecommerce site. Here user can add order differenet types of items 
 **ADMIN** 
 Admin can See the list of Products and Users. 
 
+## 🔗Project Demo Video 👇  
+[ View Video : ] (https://www.youtube.com/watch?v=2hahxGs1PWE)
 
 ## 🔗Live Site 👇  
 [Live Site : ] (https://bd-mart-redux.web.app/)
